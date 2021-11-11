@@ -12,35 +12,49 @@ import 'package:purchase_order/src/ui/login/repository/login_routes.dart';
 class LoginRepository {
   final ApiInstance? _apiInstance = ApiInstance.getInstance();
 
-  Future<User?> signIn(String? username, String? password) async {
+  Future<Map> signIn(String? username, String? password) async {
     Uri url = _apiInstance!.concatURL(LoginRoutes.login);
 
-    Response response = await _apiInstance!.client.post(
-      url,
-      body: {
-        "user": username,
-        "pass": password,
-      },
-    );
+    try {
+      Response response = await _apiInstance!.client.post(
+        url,
+        body: {
+          "user": username,
+          "pass": password,
+        },
+      );
 
-    switch (response.statusCode) {
-      case 200:
-        BaseResponse<User> result = BaseResponse<User>.fromJson(
-            jsonDecode(response.body), (data) => User.fromJson(data));
+      switch (response.statusCode) {
+        case 200:
+          BaseResponse<User> result = BaseResponse<User>.fromJson(
+              jsonDecode(response.body), (data) => User.fromJson(data));
 
-        if (result.success == "1") {
-          User user = result.data[0];
+          if (result.success == "1") {
+            User user = result.data[0];
 
-          SharedPreferencesRepo.setPrefer(
-              SharedPreferencesKeys.user, jsonEncode(user));
-          UserInstance.getInstance(user.name, user.code);
+            SharedPreferencesRepo.setPrefer(
+                SharedPreferencesKeys.user, jsonEncode(user));
+            UserInstance.getInstance(user.name, user.code);
 
-          return user;
-        }
-        break;
-      default:
-        break;
+            return {
+              "user": user,
+              "result": "CONNECTED",
+            };
+          }
+          break;
+        default:
+          break;
+      }
+    } catch (error) {
+      return {
+        "user": null,
+        "result": "CONNECTION",
+      };
     }
-    return null;
+
+    return {
+      "user": null,
+      "result": "PASSWORD",
+    };
   }
 }

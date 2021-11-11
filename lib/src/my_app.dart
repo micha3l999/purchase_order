@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:purchase_order/src/routes/pages.dart';
 import 'package:purchase_order/src/ui/create/provider/cart_model.dart';
+import 'package:purchase_order/src/ui/login/provider/login_provider.dart';
 import 'package:purchase_order/src/utils/colors.dart';
 import 'package:purchase_order/src/utils/fonts.dart';
 
@@ -23,8 +24,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (_) => CartModel(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<CartModel>(
+          create: (_) => CartModel(),
+        ),
+        ChangeNotifierProvider<LoginProvider>(
+          create: (_) => LoginProvider(),
+        ),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: "Orden de compra",

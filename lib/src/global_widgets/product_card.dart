@@ -5,6 +5,7 @@ import 'package:purchase_order/src/global_widgets/primary_button.dart';
 import 'package:purchase_order/src/global_widgets/quantity_selector.dart';
 import 'package:purchase_order/src/models/product.dart';
 import 'package:purchase_order/src/models/product_selected.dart';
+import 'package:purchase_order/src/network/api_instance.dart';
 import 'package:purchase_order/src/ui/create/provider/cart_model.dart';
 import 'package:purchase_order/src/utils/dialogs.dart';
 import 'package:purchase_order/src/utils/dimensions.dart';
@@ -76,8 +77,30 @@ class _ProductCardState extends State<ProductCard> {
                       padding: const EdgeInsets.all(Dimensions.littlePadding),
                       alignment: Alignment.center,
                       child: FadeInImage.memoryNetwork(
-                        image: widget.product.image,
+                        image:
+                            "${ApiInstance.baseURL.substring(0, (ApiInstance.baseURL.length - 10))}${widget.product.image}",
                         placeholder: kTransparentImage,
+                        imageErrorBuilder: (_, object, stackTrace) {
+                          return AspectRatio(
+                            aspectRatio: 1,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.blueGrey,
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              alignment: Alignment.center,
+                              child: const Padding(
+                                padding: EdgeInsets.all(5),
+                                child: Text(
+                                  "No se pudo cargar la imagen...",
+                                  textAlign: TextAlign.center,
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 12),
+                                ),
+                              ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                   ),

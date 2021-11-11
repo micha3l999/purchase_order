@@ -1,15 +1,31 @@
 import 'package:http/http.dart' show Client;
+import 'package:purchase_order/src/network/api_base_routes.dart';
 
 class ApiInstance {
-  //final String _baseURL = "http://190.110.52.182:9001/webservice";
-  final String _baseURL = "http://192.168.3.10/webservice";
+  static late String _baseURL;
   final String _printerURL = "http://192.168.3.10:9001/ImpresionTermica";
   final Client client = Client();
 
   static ApiInstance? _apiProviderImpl;
 
-  static ApiInstance? getInstance() {
-    if (_apiProviderImpl == null) return ApiInstance();
+  ApiInstance(String baseUrl) {
+    _baseURL = baseUrl;
+  }
+
+  static set baseURL(String value) {
+    _baseURL = value;
+  }
+
+  static String get baseURL => _baseURL;
+
+  static ApiInstance? getInstance([bool isRemote = false]) {
+    if (_apiProviderImpl == null) {
+      if (isRemote) {
+        _apiProviderImpl = ApiInstance(ApiBaseRoutes.remoteUrl);
+      } else {
+        _apiProviderImpl = ApiInstance(ApiBaseRoutes.localUrl);
+      }
+    }
     return _apiProviderImpl;
   }
 

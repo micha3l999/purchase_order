@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:purchase_order/src/global_widgets/my_icons.dart';
-import 'package:purchase_order/src/global_widgets/no_scroll_behavior.dart';
 import 'package:purchase_order/src/global_widgets/primary_button.dart';
-import 'package:purchase_order/src/global_widgets/product_card.dart';
 import 'package:purchase_order/src/ui/cart/widgets/selected_product_card.dart';
 import 'package:purchase_order/src/ui/create/provider/cart_model.dart';
 import 'package:purchase_order/src/utils/colors.dart';

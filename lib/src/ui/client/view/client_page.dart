@@ -207,7 +207,7 @@ class _ClientPageState extends State<ClientPage> {
               builder: (context, bool value, child) {
                 if (value) {
                   return Container(
-                    color: Colors.transparent,
+                    color: Color.fromRGBO(255, 255, 255, 0.7),
                     child: Center(child: CircularProgressIndicator()),
                   );
                 }
@@ -639,7 +639,7 @@ class _ClientPageState extends State<ClientPage> {
                 width: 1,
                 color: const PdfColor.fromInt(0xFFCFA833),
               ))),
-          productFieldPricePdf(product.price!, 72),
+          productFieldPricePdf(priceWithoutIva(product.price!), 72),
           pw.Container(
               width: 2,
               child: pw.Expanded(
@@ -648,7 +648,9 @@ class _ClientPageState extends State<ClientPage> {
                 color: const PdfColor.fromInt(0xFFCFA833),
               ))),
           productFieldPricePdf(
-              getSubtotalPrice(product.price!, product.quantity!), 78),
+              getSubtotalPrice((double.parse(product.price!) / 1.12).toString(),
+                  product.quantity!),
+              78),
         ],
       ),
     );
@@ -801,14 +803,13 @@ class _ClientPageState extends State<ClientPage> {
 
   // calculate the subtotal of the total order
   String getSubtotalPriceOrder() {
-    double subtotalOrder = (_cartModelProvider.totalPrice -
-        (_cartModelProvider.totalPrice * 0.12));
+    double subtotalOrder = (_cartModelProvider.totalPrice / 1.12);
     return subtotalOrder.toStringAsFixed(2);
   }
 
   // calculate the subtotal IVA of the total order
   String getSubtotalIVAOrder() {
-    return (_cartModelProvider.totalPrice * 0.12).toStringAsFixed(2);
+    return ((_cartModelProvider.totalPrice / 1.12) * 0.12).toStringAsFixed(2);
   }
 
   // fields of total prices proforma
@@ -843,5 +844,9 @@ class _ClientPageState extends State<ClientPage> {
           fontSize: 9,
           fontWeight: bold ? pw.FontWeight.bold : pw.FontWeight.normal),
     );
+  }
+
+  priceWithoutIva(String price) {
+    return (double.parse(price) / 1.12).toStringAsFixed(2);
   }
 }

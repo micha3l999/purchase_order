@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:purchase_order/src/global_widgets/my_icons.dart';
 import 'package:purchase_order/src/models/product_selected.dart';
+import 'package:purchase_order/src/network/api_instance.dart';
 import 'package:purchase_order/src/ui/create/provider/cart_model.dart';
 import 'package:purchase_order/src/utils/dialogs.dart';
 import 'package:purchase_order/src/utils/dimensions.dart';
@@ -54,8 +55,25 @@ class _SelectedProductCardState extends State<SelectedProductCard> {
                       alignment: Alignment.center,
                       child: widget.product.image != null
                           ? FadeInImage.memoryNetwork(
-                              image: widget.product.image!,
+                              image:
+                                  "${ApiInstance.baseURL.substring(0, (ApiInstance.baseURL.length - 10))}${widget.product.image}",
                               placeholder: kTransparentImage,
+                              imageErrorBuilder: (_, object, stackTrace) {
+                                return AspectRatio(
+                                  aspectRatio: 1,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: Colors.blueGrey,
+                                      borderRadius: BorderRadius.circular(15),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Text(
+                                      "Opps...",
+                                      style: TextStyle(color: Colors.white),
+                                    ),
+                                  ),
+                                );
+                              },
                             )
                           : Container(),
                     ),
