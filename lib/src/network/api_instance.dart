@@ -3,6 +3,8 @@ import 'package:purchase_order/src/network/api_base_routes.dart';
 
 class ApiInstance {
   static late String _baseURL;
+
+  // Url to print
   final String _printerURL = "http://192.168.3.10:9001/ImpresionTermica";
   final Client client = Client();
 
