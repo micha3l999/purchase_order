@@ -19,7 +19,7 @@ class CreateClientFormState extends State<CreateClientForm> {
   final ClientRepository _repository = ClientRepository();
   late CartModel cartModelProvider;
   final GlobalKey<FormState> _formKey = GlobalKey();
-  final List<TextEditingController> _controllerList = [
+  final List<TextEditingController> controllerList = [
     TextEditingController(),
     TextEditingController(),
     TextEditingController(),
@@ -69,10 +69,10 @@ class CreateClientFormState extends State<CreateClientForm> {
                 return "";
               }
             },
-            controller: _controllerList[0],
+            controller: controllerList[0],
             onSaved: (String? value) {
               if (value != null && value.isNotEmpty) {
-                _formData["name"] = _controllerList[0].value.text;
+                _formData["name"] = controllerList[0].value.text;
               }
             },
             decoration: getEditTextDecoration(
@@ -84,10 +84,10 @@ class CreateClientFormState extends State<CreateClientForm> {
                 return "";
               }
             },
-            controller: _controllerList[1],
+            controller: controllerList[1],
             onSaved: (String? value) {
               if (value != null && value.isNotEmpty) {
-                _formData["identification"] = _controllerList[1].value.text;
+                _formData["identification"] = controllerList[1].value.text;
               }
             },
             decoration: getEditTextDecoration(
@@ -99,10 +99,10 @@ class CreateClientFormState extends State<CreateClientForm> {
                 return "";
               }
             },
-            controller: _controllerList[2],
+            controller: controllerList[2],
             onSaved: (String? value) {
               if (value != null && value.isNotEmpty) {
-                _formData["phone"] = _controllerList[2].value.text;
+                _formData["phone"] = controllerList[2].value.text;
               }
             },
             decoration:
@@ -114,10 +114,10 @@ class CreateClientFormState extends State<CreateClientForm> {
                 return "";
               }
             },
-            controller: _controllerList[3],
+            controller: controllerList[3],
             onSaved: (String? value) {
               if (value != null && value.isNotEmpty) {
-                _formData["address"] = _controllerList[3].value.text;
+                _formData["address"] = controllerList[3].value.text;
               }
             },
             decoration:
@@ -129,10 +129,10 @@ class CreateClientFormState extends State<CreateClientForm> {
                 return "";
               }
             },
-            controller: _controllerList[4],
+            controller: controllerList[4],
             onSaved: (String? value) {
               if (value != null && value.isNotEmpty) {
-                _formData["email"] = _controllerList[4].value.text;
+                _formData["email"] = controllerList[4].value.text;
               }
             },
             decoration:
@@ -141,24 +141,6 @@ class CreateClientFormState extends State<CreateClientForm> {
           const SizedBox(
             height: 15,
           ),
-          /*Row(
-            children: [
-              PrimaryButton(
-                  title: Row(
-                    children: const [
-                      Text("Crear cliente"),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Icon(
-                        Icons.person_add,
-                        size: 20,
-                      )
-                    ],
-                  ),
-                  onTap: createClient),
-            ],
-          ),*/
         ],
       ),
     );

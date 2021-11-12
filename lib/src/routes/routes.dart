@@ -7,4 +7,5 @@ abstract class Routes {
   static const String clientPage = "/client";
   static const String cartPage = "/cart";
   static const String orderInformation = "/order_information";
+  static const String pastOrdersPage = "/past_orders";
 }

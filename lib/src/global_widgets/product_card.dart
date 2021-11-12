@@ -221,36 +221,6 @@ class _ProductCardState extends State<ProductCard> {
                 ],
               ),
             ),
-            /*ValueListenableBuilder(
-                valueListenable: _productAdded,
-                builder: (context, bool value, Widget? child) {
-                  if (value) {
-                    return Card(
-                      color: Colors.transparent,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      elevation: 2,
-                      child: Container(
-                        alignment: Alignment.topRight,
-                        child: Container(
-                          height: 35,
-                          width: 35,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: RoundedRemoveIconButton(
-                            removeFunction: () {
-                              _productAdded.value = false;
-                            },
-                          ),
-                        ),
-                      ),
-                    );
-                  }
-                  return Container();
-                }),*/
           ],
         ),
       ),
@@ -333,6 +303,22 @@ class _ProductCardState extends State<ProductCard> {
       }
       if (!priceAdded) {
         prices.add("0");
+      }
+    }
+
+    if (widget.product.price6 != null &&
+        widget.product.price6 != "0" &&
+        widget.product.price6!.isNotEmpty) {
+      double price = double.parse(widget.product.price6!);
+      String priceFixed = price.toStringAsFixed(2);
+      bool priceAdded = false;
+      for (var e in prices) {
+        if (e == priceFixed) {
+          priceAdded = true;
+        }
+      }
+      if (!priceAdded) {
+        prices.add(priceFixed);
       }
     }
 

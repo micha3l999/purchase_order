@@ -9,6 +9,7 @@ import 'package:purchase_order/src/routes/routes.dart';
 import 'package:purchase_order/src/ui/create/provider/cart_model.dart';
 import 'package:purchase_order/src/ui/create/view/create_page.dart';
 import 'package:purchase_order/src/ui/manage_orders/view/manage_orders.dart';
+import 'package:purchase_order/src/ui/past_orders/view/past_orders_page.dart';
 import 'package:purchase_order/src/ui/report_stock/view/report_stock_view.dart';
 import 'package:purchase_order/src/utils/colors.dart';
 
@@ -27,7 +28,8 @@ class _HomeState extends State<Home> {
       key: GlobalKey(),
     ),
     const ManageOrders(),
-    const ReportStockView()
+    const ReportStockView(),
+    const PastOrdersPage(),
   ];
   final ValueNotifier<int> _selectedOptionChild = ValueNotifier(0);
 
@@ -80,7 +82,8 @@ class _HomeState extends State<Home> {
                               key: GlobalKey(),
                             ),
                             const ManageOrders(),
-                            const ReportStockView()
+                            const ReportStockView(),
+                            const PastOrdersPage(),
                           ];
                           setState(() {});
                           //_selectedOptionChild.notifyListeners();
@@ -189,11 +192,20 @@ class _HomeState extends State<Home> {
                       _advancedDrawerController.value =
                           AdvancedDrawerValue.hidden();
                     },
-                    leading: const Icon(Icons.delete_outline_outlined),
+                    leading: const Icon(Icons.desktop_windows),
                     title: const Text('Stock Producto'),
                   ),
+                  ListTile(
+                    onTap: () {
+                      _selectedOptionChild.value = 3;
+                      _advancedDrawerController.value =
+                          AdvancedDrawerValue.hidden();
+                    },
+                    leading: const Icon(Icons.date_range_outlined),
+                    title: const Text('Lista de ventas'),
+                  ),
                   SizedBox(
-                    height: (height - 496).isNegative ? 0 : (height - 496),
+                    height: (height - 555).isNegative ? 0 : (height - 555),
                   ),
                   GestureDetector(
                     onTap: () {

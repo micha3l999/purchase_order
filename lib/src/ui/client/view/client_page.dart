@@ -125,7 +125,7 @@ class _ClientPageState extends State<ClientPage> {
                               onTap: searchClient),
                         ],
                       ),
-                      ValueListenableBuilder(
+                      /*ValueListenableBuilder(
                         valueListenable: _client,
                         builder: (_, Client? value, Widget? child) {
                           if (value != null) {
@@ -134,7 +134,7 @@ class _ClientPageState extends State<ClientPage> {
                             return Container();
                           }
                         },
-                      ),
+                      ),*/
                       const SizedBox(height: 40),
                       CreateClientForm(
                         key: _createClientFormKey,
@@ -225,6 +225,17 @@ class _ClientPageState extends State<ClientPage> {
     _client.value = await _repository.searchClient(identification);
 
     if (_client.value != null) {
+      _createClientFormKey.currentState!.controllerList[0].text =
+          _client.value!.name!;
+      _createClientFormKey.currentState!.controllerList[1].text =
+          identification;
+      _createClientFormKey.currentState!.controllerList[2].text =
+          _client.value!.telephone!;
+      _createClientFormKey.currentState!.controllerList[3].text =
+          _client.value!.address!;
+      _createClientFormKey.currentState!.controllerList[4].text =
+          _client.value!.email!;
+
       _cartModelProvider.client = _client.value!;
       _cartModelProvider.client!.identification = identification;
     } else {
@@ -662,10 +673,10 @@ class _ClientPageState extends State<ClientPage> {
       alignment: pw.Alignment.center,
       width: width,
       child: pw.Padding(
-        padding: pw.EdgeInsets.symmetric(vertical: 2, horizontal: 3),
+        padding: const pw.EdgeInsets.symmetric(vertical: 2, horizontal: 3),
         child: pw.Text(
           text,
-          style: pw.TextStyle(fontSize: 9),
+          style: const pw.TextStyle(fontSize: 9),
         ),
       ),
     );
@@ -778,7 +789,9 @@ class _ClientPageState extends State<ClientPage> {
 
     if (clientAdded) {
       CreateOrderResponse? createOrderResponse = await _repository.saveProforma(
-          _cartModelProvider.client!.code!, _cartModelProvider.products);
+          _cartModelProvider.client!.code!,
+          _cartModelProvider.products,
+          _controllerObservation.value.text);
 
       if (createOrderResponse != null) {
         _loading.value = false;

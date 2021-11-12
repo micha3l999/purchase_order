@@ -31,8 +31,11 @@ class Product {
   @JsonKey(name: "precio5")
   final String? price5;
 
+  @JsonKey(name: "precio6")
+  final String? price6;
+
   Product(this.code, this.description, this.stock, this.image, this.price1,
-      this.price2, this.price3, this.price4, this.price5);
+      this.price2, this.price3, this.price4, this.price5, this.price6);
 
   factory Product.fromJson(Map<String, dynamic> json) =>
       _$ProductFromJson(json);

@@ -169,3 +169,24 @@ class MyIconApplyProforma extends StatelessWidget {
     );
   }
 }
+
+class MyIconDate extends StatelessWidget {
+  const MyIconDate({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Icon(Icons.calendar_today);
+  }
+}
+
+class MyIconSearch extends StatelessWidget {
+  const MyIconSearch({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const Icon(
+      Icons.search_outlined,
+      size: 20,
+    );
+  }
+}

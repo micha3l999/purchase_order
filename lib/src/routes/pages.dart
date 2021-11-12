@@ -7,6 +7,7 @@ import 'package:purchase_order/src/ui/login/view/login_page.dart';
 import 'package:purchase_order/src/routes/routes.dart';
 import 'package:purchase_order/src/ui/manage_orders/view/manage_orders.dart';
 import 'package:purchase_order/src/ui/manage_orders/view/order_detail_page.dart';
+import 'package:purchase_order/src/ui/past_orders/view/past_orders_page.dart';
 
 abstract class Pages {
   static const String initial = "/login";
@@ -19,5 +20,6 @@ abstract class Pages {
     Routes.clientPage: (_) => const ClientPage(),
     Routes.cartPage: (_) => const CartPage(),
     Routes.orderInformation: (_) => const OrderDetailPage(),
+    Routes.pastOrdersPage: (_) => const PastOrdersPage()
   };
 }

@@ -16,6 +16,7 @@ Product _$ProductFromJson(Map<String, dynamic> json) => Product(
       json['precio3'] as String?,
       json['precio4'] as String?,
       json['precio5'] as String?,
+      json['precio6'] as String?,
     );
 
 Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
@@ -28,4 +29,5 @@ Map<String, dynamic> _$ProductToJson(Product instance) => <String, dynamic>{
       'precio3': instance.price3,
       'precio4': instance.price4,
       'precio5': instance.price5,
+      'precio6': instance.price6,
     };

@@ -23,9 +23,9 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)!.settings.arguments as OrdersPending;
+    final mapArgs = ModalRoute.of(context)!.settings.arguments as Map;
+    final args = mapArgs["data"];
     final width = MediaQuery.of(context).size.width;
-    final height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -44,7 +44,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(Icons.assignment),
+                    const Icon(Icons.assignment),
                     const SizedBox(
                       width: 5,
                     ),
@@ -59,15 +59,16 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 ),
                 Container(
                   child: const Divider(),
-                  padding: EdgeInsets.symmetric(horizontal: 15),
+                  padding: const EdgeInsets.symmetric(horizontal: 15),
                 ),
                 const SizedBox(
                   height: 5,
                 ),
                 Container(
-                  padding: EdgeInsets.symmetric(
-                      vertical: Dimensions.normalPadding,
-                      horizontal: Dimensions.littlePadding),
+                  padding: const EdgeInsets.symmetric(
+                    vertical: Dimensions.normalPadding,
+                    horizontal: Dimensions.littlePadding,
+                  ),
                   child: Column(
                     children: [
                       rowInformation("Código: ", args.code),
@@ -78,7 +79,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
                 ),
                 Expanded(
                   child: productsList(args),
-                )
+                ),
               ],
             ),
           ),
@@ -99,7 +100,7 @@ class _OrderDetailPageState extends State<OrderDetailPage> {
     );
   }
 
-  productsList(OrdersPending args) {
+  productsList(args) {
     return FutureBuilder(
         future: ManageOrdersRepository.getOrdersDetails(args.type, args.code),
         builder: (context, AsyncSnapshot<OrderDetails?> snapshot) {

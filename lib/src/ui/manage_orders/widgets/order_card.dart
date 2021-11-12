@@ -5,7 +5,6 @@ import 'package:purchase_order/src/global_widgets/primary_button.dart';
 import 'package:purchase_order/src/routes/routes.dart';
 import 'package:purchase_order/src/ui/manage_orders/models/orders_pending.dart';
 import 'package:purchase_order/src/ui/manage_orders/provider/orders_list_provider.dart';
-import 'package:purchase_order/src/ui/manage_orders/view/order_detail_page.dart';
 import 'package:purchase_order/src/utils/dimensions.dart';
 import 'package:purchase_order/src/utils/fonts.dart';
 
@@ -105,7 +104,7 @@ class _OrderCardState extends State<OrderCard> {
                         onTap: () {
                           Navigator.of(context).pushNamed(
                             Routes.orderInformation,
-                            arguments: widget.ordersPending,
+                            arguments: {"data": widget.ordersPending},
                           );
                         }),
                   ],

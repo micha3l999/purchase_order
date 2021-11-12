@@ -131,8 +131,8 @@ class ClientRepository {
     return false;
   }
 
-  Future<CreateOrderResponse?> saveProforma(
-      String clientCode, List<ProductSelected> productsSelected) async {
+  Future<CreateOrderResponse?> saveProforma(String clientCode,
+      List<ProductSelected> productsSelected, String observation) async {
     String? userString =
         await SharedPreferencesRepo.getPrefer(SharedPreferencesKeys.user);
     User userData = User.fromJson(jsonDecode(userString!));
@@ -152,6 +152,7 @@ class ClientRepository {
       "op": jsonEncode({
         "code": "1",
       }),
+      "observa": observation,
     });
 
     try {
