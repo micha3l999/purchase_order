@@ -1,6 +1,6 @@
 # purchase_order
 
-Orden de Compra para XIAO
+Purchase order app for iOS and Android systems developed with flutter
 
 ## Getting Started
 
